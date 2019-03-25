@@ -56,7 +56,6 @@ let fundo = class Fundo {
         }
         this.statsData = dataEstruturada
         this.statsKeys = Object.keys(this.statsData)
-        //this.calcStats(t)
 
         return dataEstruturada;
     }
@@ -78,25 +77,39 @@ let fundo = class Fundo {
 
     printRendimentos(anoInicio, anoFim) {
 
+        let printHelper = {};
+
         anoInicio || (anoInicio = 0);
         anoFim || (anoFim = 9999);
 
         for (let ano in this.statsData) {
             if (ano > anoFim) 
-                return;
-            if (ano >= anoInicio)
-                this.print(ano);
+                break;
+            if (ano >= anoInicio){
+                this.print(ano, printHelper);
+            }
         }
+
+        console.table(printHelper);
 
     }
 
-    print(ano) {
-        console.log(ano)
-        for (let mes in this.statsData[ano].stats.fundo) {
-            if (mes != 'total')
-                console.log(this.monthsShort[parseInt(mes - 1)] || 'Ano', this.statsData[ano].stats.fundo[mes].toFixed(2) + '%')
+    print(ano, printHelper) {
+        printHelper[ano] = {};
+        for (let i = 0; i < 12; i++) {
+            let rendimentoMensal = this.statsData[ano].stats.fundo[this.stringfyMonth(i + 1)];
+            printHelper[ano][this.monthsShort[i]] = rendimentoMensal ? rendimentoMensal.toFixed(2) + '%' : '-';
         }
-        console.log();
+        printHelper[ano]['Ano'] = this.statsData[ano].stats.fundo['year'].toFixed(2) + '%';
+    }
+
+    stringfyMonth(month) {
+        if (month.toString().length < 2) {
+            let a ="0" + month.toString();
+            return a;
+        } else {
+            return month.toString();
+        }
     }
 }
 

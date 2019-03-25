@@ -25,21 +25,33 @@ Até que vi o retorno da API, todo torto e nada eficiente, e com mais de **22 mi
 
 Enfim, fiquei curioso sobre como transformar esses dados em informação palpável, e então vasculhei o código-fonte da página, que possuia um import para um CDN que me levou para um javascript minificado e nem um pouco atraente de mais de **70 mil linhas** após formatação que se encontra no repositório como [rawFunction.js](./rawFunction.js).
 
+## Comparação
+
+[Retorno](./img/retorno.png)
+
+[Site](./img/retornoSite.png)
+
 ## Funcionamento
 
 `node rendimentoMensal.js`
 
- Irá retornar todo rendimento disponível pela API.
+Irá retornar todo rendimento disponível pela API.
+
+![Retorno](./img/retorno.png)
 
 ### Args
 
-`node rendimentoAnual 2015 2017`
+`node rendimentoMensal.js 2015 2017`
+
+![Retorno Parcial](./img/retorno-parcial.png)
 
 Irá retornar os rendimentos mensais de 2015 até 2017.
 
-`node rendimentoAnual 2015`
+`node rendimentoMensal.js 2019`
 
-Irá retornar os rendimentos mensais de 2015 até o último disponível.
+![Retorno 2019](./img/retorno2019.png)
+
+Irá retornar os rendimentos mensais de 2019 até o último disponível.
 
 ### Observações
 
