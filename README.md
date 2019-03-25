@@ -27,11 +27,11 @@ Enfim, fiquei curioso sobre como transformar esses dados em informação palpáv
 
 ## Funcionamento
 
-Execute o arquivo `rendimentoMensal.js` e vai retornar todo o rendimento disponível pela API.
+`node rendimentoMensal.js`
 
-É possível adicionar até 2 argumentos na chamada.
+ Irá retornar todo rendimento disponível pela API.
 
-### Chamada
+### Args
 
 `node rendimentoAnual 2015 2017`
 
