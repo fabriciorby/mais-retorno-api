@@ -72,3 +72,19 @@ Retorna uma lista com TODOS OS FUNDOS disponíveis no banco de dados. Ex: [lista
 const url = 'https://maisretorno.com/api/v1/fundos/s/' + nomeFundo '/';
 ```
 Retorna uma busca numa lista de fundos com a `String nomeFundo` que você desejar.
+
+```json
+c: cnpj
+n: nome
+s: nome api
+p: patrimonio
+q: cotistas
+
+{
+    "c": 26673556000132,
+    "n": "ALASKA BLACK INSTITUCIONAL FUNDO DE INVESTIMENTO DE ACOES",
+    "s": "alaska-black-institucional-fia",
+    "p": 1294212260.75,
+    "q": 79508
+}
+```
