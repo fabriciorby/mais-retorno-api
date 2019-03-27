@@ -88,3 +88,8 @@ q: cotistas
     "q": 79508
 }
 ```
+
+```javascript
+const url - 'https://maisretorno.com/api/v1/fundos/ranking/'
+```
+Retorna os top 10 fundos Renda Fixa, Multi Mercado e Ações dos últimos 6 meses.
