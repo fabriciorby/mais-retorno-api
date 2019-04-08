@@ -4,6 +4,14 @@ Engenharia reversa de um js minificado.
 
 Transformando um pouco mais de **92 mil linhas** (js + json) na informação que eu preciso.
 
+## UPDATE
+
+Agora e possível pesquisar fundos!
+
+![Retorno](./img/mais-retorno-api.gif)
+
+Obrigado [`inquirer`](https://github.com/SBoudrias/Inquirer.js) e seu plugin de autocomplete.
+
 ## Introdução
 
 Era para ser um domingo comum, onde eu iria estudar para as minhas provas de segunda-feira... Entretanto, fui ver alguns fundos de investimento, como por exemplo esse, da minha previdência privada
