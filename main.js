@@ -53,7 +53,7 @@ const writeFile = async (nome, data) => {
     fs.writeFile(nome + '.json', data, 'utf8', (err) => { if (err) throw err; });
 }
 
-let main = async (codFundo) => {
+const main = async (codFundo) => {
     let fundData = await getFundData(codFundo);
     let fundo = new Fundo(fundData);
     writeFile('RetornoAPI', JSON.stringify(fundData));
@@ -62,4 +62,4 @@ let main = async (codFundo) => {
     console.log("Exibindo dados para " + codFundo);
 }
 
-let args = process.argv.slice(2);
+const args = process.argv.slice(2);
