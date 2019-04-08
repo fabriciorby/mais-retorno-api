@@ -61,14 +61,14 @@ let fundo = class Fundo {
     }
 
     getFirstTickOfYear(t, e, n) {
-        void 0 === n && (n = "ticks");
+        void 0 === n && (n = 'ticks');
         let r = (new Date).getFullYear().toString();
         t[e] || e === r || (e = r), t[e] || (e = (parseInt(e) - 1).toString())
         return t[e][n][t[e].months[0]][0]
     }
 
     getLastTickOfYear(t, e, n) {
-        void 0 === n && (n = "ticks");
+        void 0 === n && (n = 'ticks');
         let r = (new Date).getFullYear().toString();
         t[e] || e === r || (e = r), t[e] || (e = (parseInt(e) - 1).toString());
         let i = t[e].months[t[e].months.length - 1];
@@ -97,15 +97,15 @@ let fundo = class Fundo {
     print(ano, printHelper) {
         printHelper[ano] = {};
         for (let i = 0; i < 12; i++) {
-            let rendimentoMensal = this.statsData[ano].stats.fundo[this.stringfyMonth(i + 1)];
+            let rendimentoMensal = this.statsData[ano].stats.fundo[this.stringifyMonth(i + 1)];
             printHelper[ano][this.monthsShort[i]] = rendimentoMensal ? rendimentoMensal.toFixed(2) + '%' : '-';
         }
         printHelper[ano]['Ano'] = this.statsData[ano].stats.fundo['year'].toFixed(2) + '%';
     }
 
-    stringfyMonth(month) {
+    stringifyMonth(month) {
         if (month.toString().length < 2) {
-            let a ="0" + month.toString();
+            let a = '0' + month.toString();
             return a;
         } else {
             return month.toString();
