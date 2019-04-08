@@ -4,7 +4,7 @@ Engenharia reversa de um js minificado.
 
 Transformando um pouco mais de **92 mil linhas** (js + json) na informação que eu preciso.
 
-## UPDATE
+# UPDATE
 
 Agora e possível pesquisar fundos!
 
@@ -41,7 +41,13 @@ Enfim, fiquei curioso sobre como transformar esses dados em informação palpáv
 
 ## Funcionamento
 
-`node rendimentoMensal.js`
+`git clone https://github.com/fabriciorby/mais-retorno-api.git`
+
+`cd mais-retorno-api`
+
+`npm install`
+
+`node main.js`
 
 Irá retornar todo rendimento disponível pela API.
 
@@ -49,13 +55,13 @@ Irá retornar todo rendimento disponível pela API.
 
 ### Args
 
-`node rendimentoMensal.js 2015 2017`
+`node main.js 2015 2017`
 
 ![Retorno Parcial](./img/retorno-parcial.png)
 
 Irá retornar os rendimentos mensais de 2015 até 2017.
 
-`node rendimentoMensal.js 2019`
+`node main.js 2019`
 
 ![Retorno 2019](./img/retorno2019.png)
 
@@ -69,7 +75,7 @@ O JSON final ficará gravado em [dataFundo.json](./dataFundo.json).
 
 Infelizmente o código está meio feio, afinal, peguei ele de um minificado, mas algum dia eu limpo ele.
 
-# UPDATE
+### Alguma documentação
 
 ```javascript
 const url = 'https://maisretorno.com/api/v1/fundos/';
