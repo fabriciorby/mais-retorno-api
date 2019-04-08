@@ -4,37 +4,50 @@ const fundData = require('./RetornoAPI');
 const fs = require('fs');
 const Fundo = require('./Fundo');
 
-//const url = 'https://maisretorno.com/api/v1/fundos/ss/cshg-mapfre-juro-real-fic-fim-prev/';
-
 const options = { headers: { 'Authorization': 'Basic YXBpOlIkX1hKZk1uNVdhaHlKaA==' } };
+const args = process.argv.slice(2);
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
-inquirer.prompt([{
-    type: 'autocomplete',
-    name: 'from',
-    message: 'Digite o fundo que deseja obter o rendimento.',
-    source: async (answersSoFar, input) => {
-        try {
+
+const menu = () => {
+    inquirer.prompt([{
+        type: 'autocomplete',
+        name: 'codFundo',
+        message: 'Digite o fundo que deseja obter o rendimento.',
+        pageSize: 10,
+        source: async (answersSoFar, input) => {
             if (!input) return [];
-            const response = await axios.get(getUrlPesquisa(input), options)
-            const filtroNome = response.data.map(item => item.s);
-            return filtroNome;
-        } catch (e) {
-            console.error("Não foi possível fazer a requisição.", e.Error || '');
-            console.error("Verifique sua conexão com a internet.")
-            process.exit(1);
+            const pesquisaData = await getPesquisaData(input);
+            return pesquisaData;
         }
+    }]).then(async (answers) => {
+        await getRendimento(answers.codFundo);
+        pesquisarOutroFundo();
+    });
+}
+
+const getPesquisaData = async (input) => {
+    try {
+        const response = await axios.get(getUrlPesquisa(input), options)
+        const filtroNome = response.data.map(item => item.s);
+        return filtroNome;
+    } catch (e) {
+        console.error("Não foi possível fazer a requisição.", e.Error || '');
+        console.error("Verifique sua conexão com a internet.")
+        process.exit(1);
     }
-}]).then(function (answers) {
-    main(answers.from)
-});
+}
 
 const getUrlPesquisa = (input) => {
     return 'https://maisretorno.com/api/v1/fundos/s/' + input + '/';
 }
 
-const getUrlFundo = (input) => {
-    return 'https://maisretorno.com/api/v1/fundos/ss/' + input + '/';
+const getRendimento = async (codFundo) => {
+    let fundData = await getFundData(codFundo);
+    let fundo = new Fundo(fundData);
+    writeFile('RetornoAPI', JSON.stringify(fundData));
+    writeFile('dataFundo', JSON.stringify(fundo.statsData));
+    fundo.printRendimentos(args[0], args[1]);
 }
 
 const getFundData = async (codFundo) => {
@@ -49,17 +62,29 @@ const getFundData = async (codFundo) => {
     }
 }
 
+const getUrlFundo = (codFundo) => {
+    return 'https://maisretorno.com/api/v1/fundos/ss/' + codFundo + '/';
+}
+
 const writeFile = async (nome, data) => {
     fs.writeFile(nome + '.json', data, 'utf8', (err) => { if (err) throw err; });
 }
 
-const main = async (codFundo) => {
-    let fundData = await getFundData(codFundo);
-    let fundo = new Fundo(fundData);
-    writeFile('RetornoAPI', JSON.stringify(fundData));
-    writeFile('dataFundo', JSON.stringify(fundo.statsData));
-    fundo.printRendimentos(args[0], args[1]);
-    console.log("Exibindo dados para " + codFundo);
+const pesquisarOutroFundo = () => {
+    inquirer.prompt([{
+        type: 'list',
+        name: 'input',
+        message: 'Deseja pesquisar outro fundo?',
+        choices: ['Não', 'Sim'],
+        filter: (input) => {
+            return input == 'Sim' ? true : false;
+        }
+    }]).then((answers) => {
+        if (answers.input) {
+            console.clear();
+            menu();
+        }
+    });
 }
 
-const args = process.argv.slice(2);
+menu();
