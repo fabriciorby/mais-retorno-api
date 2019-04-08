@@ -27,7 +27,7 @@ const url = 'https://maisretorno.com/api/v1/fundos/ss/cshg-mapfre-juro-real-fic-
 const options = { headers: { 'Authorization': 'Basic YXBpOlIkX1hKZk1uNVdhaHlKaA==' } };
 ```
 
-Até que vi o retorno da API, todo torto e nada eficiente, e com mais de **22 mil linhas** após formatação, que sem encontra em [RetornoApi.json](./retornoAPI.json).
+Até que vi o retorno da API, todo torto e nada eficiente, e com mais de **22 mil linhas** após formatação, que sem encontra em [RetornoApi.json](./json/retornoAPI.json).
 
 ![Retorno da API](./img/retornoAPI.png)
 
@@ -69,9 +69,9 @@ Irá retornar os rendimentos mensais de 2019 até o último disponível.
 
 ### Observações
 
-Caso não seja possível se conectar com a internet ele irá retornar o dado gravado no cache [RetornoApi.json](./retornoAPI.json).
+Caso não seja possível se conectar com a internet ele irá retornar o dado gravado no cache [RetornoApi.json](./json/retornoAPI.json).
 
-O JSON final ficará gravado em [dataFundo.json](./dataFundo.json).
+O JSON final ficará gravado em [dataFundo.json](./json/dataFundo.json).
 
 Infelizmente o código está meio feio, afinal, peguei ele de um minificado, mas algum dia eu limpo ele.
 
@@ -80,7 +80,7 @@ Infelizmente o código está meio feio, afinal, peguei ele de um minificado, mas
 ```javascript
 const url = 'https://maisretorno.com/api/v1/fundos/';
 ```
-Retorna uma lista com TODOS OS FUNDOS disponíveis no banco de dados. Ex: [listaFundos.json](./listaFundos.json) (6.5MB).
+Retorna uma lista com TODOS OS FUNDOS disponíveis no banco de dados. Ex: [listaFundos.json](./json/listaFundos.json) (6.5MB).
 
 ```javascript
 const url = 'https://maisretorno.com/api/v1/fundos/s/' + nomeFundo '/';

@@ -1,6 +1,6 @@
 const axios = require('axios');
 const inquirer = require('inquirer');
-const fundData = require('./RetornoAPI');
+const fundData = require('./json/RetornoAPI');
 const fs = require('fs');
 const Fundo = require('./Fundo');
 
@@ -22,7 +22,7 @@ const menu = () => {
         }
     }]).then(async (answers) => {
         await getRendimento(answers.codFundo);
-        pesquisarOutroFundo();
+        pesquisarOutroFundo(); 
     });
 }
 
@@ -66,8 +66,8 @@ const getUrlFundo = (codFundo) => {
     return 'https://maisretorno.com/api/v1/fundos/ss/' + codFundo + '/';
 }
 
-const writeFile = async (nome, data) => {
-    fs.writeFile(nome + '.json', data, 'utf8', (err) => { if (err) throw err; });
+const writeFile = (nome, data) => {
+    fs.writeFile('./json/' + nome + '.json', data, 'utf8', (err) => { if (err) throw err; });
 }
 
 const pesquisarOutroFundo = () => {
